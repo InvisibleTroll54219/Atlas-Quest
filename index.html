@@ -1,4 +1,3 @@
-{% load static %}
 <!doctype html>
 <html lang="en">
 <head>
@@ -228,6 +227,6 @@
   <div class="overlay hidden" id="help-overlay" role="dialog" aria-modal="true" aria-labelledby="help-title">
     <div class="dialog" style="text-align:left"><button class="modal-close" id="close-help" aria-label="Close help">✕</button><div class="eyebrow">How to play</div><h2 id="help-title">Your expedition guide</h2><p>Each destination is a five-question round. Get four or more right to clear the level and unlock the next one. Correct answers earn 100 points; build a streak by answering correctly in a row.</p><p>Tap <strong>Use a hint</strong> once per round to remove two wrong choices. It won't affect your score. If you miss the goal, you can try the same level again with a fresh set of questions.</p><p>Your cleared levels, best streak, and total score are saved in this browser's server session and a local SQLite database. Reset erases that saved progress.</p><button class="primary" id="help-ok" type="button">Got it</button></div>
   </div>
-  <script src="{% static 'game.js' %}" defer></script>
+  <script src="/static/game.js" defer></script>
 </body>
 </html>

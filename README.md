@@ -14,6 +14,8 @@ python manage.py runserver
 
 `setup.sh` creates `.venv`, installs `requirements.txt`, and activates the environment in the current terminal. Source it (rather than running `./setup.sh`) so activation remains in your shell. Open <http://127.0.0.1:8000/> while the Django development server is running. Stop the server with Ctrl+C. The database file (`db.sqlite3`) and the browser's session cookie keep progress available across server restarts in that browser. A different browser session has its own player progress. Use **Reset** to clear the current player's progress.
 
+Open the game at the Django URL above, not by opening `index.html` directly. The game needs Django to serve its API and static client files; opening the HTML as a local file will not connect to the game server.
+
 For a LAN-accessible development server, run `python manage.py runserver 0.0.0.0:8000` and add the host address to `ALLOWED_HOSTS` in `atlasquest/settings.py`. The included settings and secret key are for local development, not public deployment.
 
 ## Gameplay
