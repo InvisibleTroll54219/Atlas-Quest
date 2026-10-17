@@ -1,0 +1,1026 @@
+[
+  {
+    "id": "L1-Q1",
+    "level": 0,
+    "name": "Continental kickoff",
+    "region": "Continents & oceans",
+    "icon": "🌎",
+    "prompt": "Which is the largest continent by land area?",
+    "options": [
+      "Africa",
+      "Asia",
+      "North America",
+      "Europe"
+    ],
+    "answer_index": 1,
+    "explanation": "Asia covers about 30% of Earth's land area."
+  },
+  {
+    "id": "L1-Q2",
+    "level": 0,
+    "name": "Continental kickoff",
+    "region": "Continents & oceans",
+    "icon": "🌎",
+    "prompt": "Which ocean lies between Africa and Australia?",
+    "options": [
+      "Atlantic Ocean",
+      "Arctic Ocean",
+      "Indian Ocean",
+      "Southern Ocean"
+    ],
+    "answer_index": 2,
+    "explanation": "The Indian Ocean stretches between Africa, Asia, and Australia."
+  },
+  {
+    "id": "L1-Q3",
+    "level": 0,
+    "name": "Continental kickoff",
+    "region": "Continents & oceans",
+    "icon": "🌎",
+    "prompt": "What is the smallest continent by land area?",
+    "options": [
+      "Europe",
+      "Australia",
+      "Antarctica",
+      "South America"
+    ],
+    "answer_index": 1,
+    "explanation": "Australia is the smallest continent; Oceania is the wider region."
+  },
+  {
+    "id": "L1-Q4",
+    "level": 0,
+    "name": "Continental kickoff",
+    "region": "Continents & oceans",
+    "icon": "🌎",
+    "prompt": "Which continent is crossed by both the Equator and the Prime Meridian?",
+    "options": [
+      "Africa",
+      "Asia",
+      "South America",
+      "Europe"
+    ],
+    "answer_index": 0,
+    "explanation": "Both imaginary lines cross Africa."
+  },
+  {
+    "id": "L1-Q5",
+    "level": 0,
+    "name": "Continental kickoff",
+    "region": "Continents & oceans",
+    "icon": "🌎",
+    "prompt": "Which ocean is the largest on Earth?",
+    "options": [
+      "Atlantic Ocean",
+      "Indian Ocean",
+      "Pacific Ocean",
+      "Arctic Ocean"
+    ],
+    "answer_index": 2,
+    "explanation": "The Pacific is larger than all of Earth's land combined."
+  },
+  {
+    "id": "L1-Q6",
+    "level": 0,
+    "name": "Continental kickoff",
+    "region": "Continents & oceans",
+    "icon": "🌎",
+    "prompt": "How many continents are there in the commonly taught seven-continent model?",
+    "options": [
+      "5",
+      "6",
+      "7",
+      "8"
+    ],
+    "answer_index": 2,
+    "explanation": "The seven are Africa, Antarctica, Asia, Europe, North America, South America, and Australia."
+  },
+  {
+    "id": "L1-Q7",
+    "level": 0,
+    "name": "Continental kickoff",
+    "region": "Continents & oceans",
+    "icon": "🌎",
+    "prompt": "Which continent has no permanently resident native population?",
+    "options": [
+      "Antarctica",
+      "Europe",
+      "Australia",
+      "South America"
+    ],
+    "answer_index": 0,
+    "explanation": "Research stations host rotating crews, but Antarctica has no permanent native population."
+  },
+  {
+    "id": "L1-Q8",
+    "level": 0,
+    "name": "Continental kickoff",
+    "region": "Continents & oceans",
+    "icon": "🌎",
+    "prompt": "Which ocean borders the east coast of the United States?",
+    "options": [
+      "Pacific",
+      "Atlantic",
+      "Indian",
+      "Arctic"
+    ],
+    "answer_index": 1,
+    "explanation": "The Atlantic Ocean lies off the eastern coast of the United States."
+  },
+  {
+    "id": "L2-Q1",
+    "level": 1,
+    "name": "Capital city sprint",
+    "region": "Capitals & countries",
+    "icon": "🏙️",
+    "prompt": "What is the capital of Japan?",
+    "options": [
+      "Kyoto",
+      "Osaka",
+      "Tokyo",
+      "Sapporo"
+    ],
+    "answer_index": 2,
+    "explanation": "Tokyo is Japan's capital and largest city."
+  },
+  {
+    "id": "L2-Q2",
+    "level": 1,
+    "name": "Capital city sprint",
+    "region": "Capitals & countries",
+    "icon": "🏙️",
+    "prompt": "Which city is the capital of Canada?",
+    "options": [
+      "Toronto",
+      "Vancouver",
+      "Ottawa",
+      "Montreal"
+    ],
+    "answer_index": 2,
+    "explanation": "Ottawa, in Ontario, is Canada's capital."
+  },
+  {
+    "id": "L2-Q3",
+    "level": 1,
+    "name": "Capital city sprint",
+    "region": "Capitals & countries",
+    "icon": "🏙️",
+    "prompt": "What is the capital of Egypt?",
+    "options": [
+      "Alexandria",
+      "Cairo",
+      "Giza",
+      "Luxor"
+    ],
+    "answer_index": 1,
+    "explanation": "Cairo is Egypt's capital, near the Nile Delta."
+  },
+  {
+    "id": "L2-Q4",
+    "level": 1,
+    "name": "Capital city sprint",
+    "region": "Capitals & countries",
+    "icon": "🏙️",
+    "prompt": "Which is the capital of Argentina?",
+    "options": [
+      "Santiago",
+      "Lima",
+      "Buenos Aires",
+      "Montevideo"
+    ],
+    "answer_index": 2,
+    "explanation": "Buenos Aires is Argentina's capital on the Río de la Plata."
+  },
+  {
+    "id": "L2-Q5",
+    "level": 1,
+    "name": "Capital city sprint",
+    "region": "Capitals & countries",
+    "icon": "🏙️",
+    "prompt": "What is the capital of Kenya?",
+    "options": [
+      "Mombasa",
+      "Nairobi",
+      "Kampala",
+      "Addis Ababa"
+    ],
+    "answer_index": 1,
+    "explanation": "Nairobi is a major East African city and Kenya's capital."
+  },
+  {
+    "id": "L2-Q6",
+    "level": 1,
+    "name": "Capital city sprint",
+    "region": "Capitals & countries",
+    "icon": "🏙️",
+    "prompt": "Which city is the capital of South Korea?",
+    "options": [
+      "Busan",
+      "Incheon",
+      "Seoul",
+      "Daegu"
+    ],
+    "answer_index": 2,
+    "explanation": "Seoul sits in the northwest of South Korea."
+  },
+  {
+    "id": "L2-Q7",
+    "level": 1,
+    "name": "Capital city sprint",
+    "region": "Capitals & countries",
+    "icon": "🏙️",
+    "prompt": "What is the capital of New Zealand?",
+    "options": [
+      "Auckland",
+      "Christchurch",
+      "Wellington",
+      "Queenstown"
+    ],
+    "answer_index": 2,
+    "explanation": "Wellington, not the larger Auckland, is the capital."
+  },
+  {
+    "id": "L2-Q8",
+    "level": 1,
+    "name": "Capital city sprint",
+    "region": "Capitals & countries",
+    "icon": "🏙️",
+    "prompt": "Which city is the capital of Morocco?",
+    "options": [
+      "Casablanca",
+      "Marrakesh",
+      "Rabat",
+      "Fez"
+    ],
+    "answer_index": 2,
+    "explanation": "Rabat is Morocco's capital; Casablanca is its largest city."
+  },
+  {
+    "id": "L3-Q1",
+    "level": 2,
+    "name": "Mountain & river trails",
+    "region": "Physical geography",
+    "icon": "🏔️",
+    "prompt": "What is the world's highest mountain above sea level?",
+    "options": [
+      "K2",
+      "Kangchenjunga",
+      "Mount Everest",
+      "Denali"
+    ],
+    "answer_index": 2,
+    "explanation": "Mount Everest reaches about 8,849 metres above sea level."
+  },
+  {
+    "id": "L3-Q2",
+    "level": 2,
+    "name": "Mountain & river trails",
+    "region": "Physical geography",
+    "icon": "🏔️",
+    "prompt": "Which river flows through Egypt into the Mediterranean Sea?",
+    "options": [
+      "Congo",
+      "Nile",
+      "Niger",
+      "Zambezi"
+    ],
+    "answer_index": 1,
+    "explanation": "The Nile flows north through Egypt to the Mediterranean."
+  },
+  {
+    "id": "L3-Q3",
+    "level": 2,
+    "name": "Mountain & river trails",
+    "region": "Physical geography",
+    "icon": "🏔️",
+    "prompt": "The Andes mountain range runs along which continent?",
+    "options": [
+      "Africa",
+      "South America",
+      "Asia",
+      "Europe"
+    ],
+    "answer_index": 1,
+    "explanation": "The Andes stretch along the western edge of South America."
+  },
+  {
+    "id": "L3-Q4",
+    "level": 2,
+    "name": "Mountain & river trails",
+    "region": "Physical geography",
+    "icon": "🏔️",
+    "prompt": "Which is the world's largest hot desert?",
+    "options": [
+      "Gobi",
+      "Arabian",
+      "Sahara",
+      "Kalahari"
+    ],
+    "answer_index": 2,
+    "explanation": "The Sahara spans much of North Africa."
+  },
+  {
+    "id": "L3-Q5",
+    "level": 2,
+    "name": "Mountain & river trails",
+    "region": "Physical geography",
+    "icon": "🏔️",
+    "prompt": "Which river runs through London?",
+    "options": [
+      "Seine",
+      "Danube",
+      "Thames",
+      "Rhine"
+    ],
+    "answer_index": 2,
+    "explanation": "The River Thames flows through London and into the North Sea."
+  },
+  {
+    "id": "L3-Q6",
+    "level": 2,
+    "name": "Mountain & river trails",
+    "region": "Physical geography",
+    "icon": "🏔️",
+    "prompt": "Mount Kilimanjaro is in which country?",
+    "options": [
+      "Kenya",
+      "Tanzania",
+      "Uganda",
+      "Ethiopia"
+    ],
+    "answer_index": 1,
+    "explanation": "Kilimanjaro is in northeastern Tanzania, close to the Kenyan border."
+  },
+  {
+    "id": "L3-Q7",
+    "level": 2,
+    "name": "Mountain & river trails",
+    "region": "Physical geography",
+    "icon": "🏔️",
+    "prompt": "Which lake is the deepest in the world?",
+    "options": [
+      "Lake Victoria",
+      "Lake Baikal",
+      "Lake Superior",
+      "Lake Tanganyika"
+    ],
+    "answer_index": 1,
+    "explanation": "Lake Baikal in Siberia is the deepest and contains a huge share of Earth's unfrozen surface freshwater."
+  },
+  {
+    "id": "L3-Q8",
+    "level": 2,
+    "name": "Mountain & river trails",
+    "region": "Physical geography",
+    "icon": "🏔️",
+    "prompt": "The Great Barrier Reef is off the coast of which country?",
+    "options": [
+      "Indonesia",
+      "Australia",
+      "Philippines",
+      "Fiji"
+    ],
+    "answer_index": 1,
+    "explanation": "It lies in the Coral Sea off northeastern Australia."
+  },
+  {
+    "id": "L4-Q1",
+    "level": 3,
+    "name": "Flags & landmarks",
+    "region": "Culture & landmarks",
+    "icon": "🏛️",
+    "prompt": "The Eiffel Tower is a famous landmark in which city?",
+    "options": [
+      "Brussels",
+      "Paris",
+      "Lyon",
+      "Geneva"
+    ],
+    "answer_index": 1,
+    "explanation": "The Eiffel Tower was built in Paris for the 1889 World's Fair."
+  },
+  {
+    "id": "L4-Q2",
+    "level": 3,
+    "name": "Flags & landmarks",
+    "region": "Culture & landmarks",
+    "icon": "🏛️",
+    "prompt": "Machu Picchu is located in which country?",
+    "options": [
+      "Bolivia",
+      "Peru",
+      "Ecuador",
+      "Chile"
+    ],
+    "answer_index": 1,
+    "explanation": "The Inca citadel sits high in the Peruvian Andes."
+  },
+  {
+    "id": "L4-Q3",
+    "level": 3,
+    "name": "Flags & landmarks",
+    "region": "Culture & landmarks",
+    "icon": "🏛️",
+    "prompt": "The ancient city of Petra is in which country?",
+    "options": [
+      "Jordan",
+      "Lebanon",
+      "Egypt",
+      "Syria"
+    ],
+    "answer_index": 0,
+    "explanation": "Petra, famous for its rock-cut architecture, is in southern Jordan."
+  },
+  {
+    "id": "L4-Q4",
+    "level": 3,
+    "name": "Flags & landmarks",
+    "region": "Culture & landmarks",
+    "icon": "🏛️",
+    "prompt": "Which country is home to the Taj Mahal?",
+    "options": [
+      "Pakistan",
+      "India",
+      "Bangladesh",
+      "Nepal"
+    ],
+    "answer_index": 1,
+    "explanation": "The Taj Mahal stands in Agra, India."
+  },
+  {
+    "id": "L4-Q5",
+    "level": 3,
+    "name": "Flags & landmarks",
+    "region": "Culture & landmarks",
+    "icon": "🏛️",
+    "prompt": "The Colosseum is in which city?",
+    "options": [
+      "Athens",
+      "Rome",
+      "Istanbul",
+      "Naples"
+    ],
+    "answer_index": 1,
+    "explanation": "Rome's Colosseum is an ancient Roman amphitheatre."
+  },
+  {
+    "id": "L4-Q6",
+    "level": 3,
+    "name": "Flags & landmarks",
+    "region": "Culture & landmarks",
+    "icon": "🏛️",
+    "prompt": "Which country's flag features a red maple leaf?",
+    "options": [
+      "Austria",
+      "Canada",
+      "Denmark",
+      "Switzerland"
+    ],
+    "answer_index": 1,
+    "explanation": "The maple leaf has appeared on Canada's national flag since 1965."
+  },
+  {
+    "id": "L4-Q7",
+    "level": 3,
+    "name": "Flags & landmarks",
+    "region": "Culture & landmarks",
+    "icon": "🏛️",
+    "prompt": "The Great Pyramid of Giza is in which country?",
+    "options": [
+      "Sudan",
+      "Egypt",
+      "Iraq",
+      "Libya"
+    ],
+    "answer_index": 1,
+    "explanation": "The Giza pyramid complex lies just outside Cairo, Egypt."
+  },
+  {
+    "id": "L4-Q8",
+    "level": 3,
+    "name": "Flags & landmarks",
+    "region": "Culture & landmarks",
+    "icon": "🏛️",
+    "prompt": "Angkor Wat is a major temple complex in which country?",
+    "options": [
+      "Thailand",
+      "Cambodia",
+      "Laos",
+      "Myanmar"
+    ],
+    "answer_index": 1,
+    "explanation": "Angkor Wat is in Cambodia and appears on its national flag."
+  },
+  {
+    "id": "L5-Q1",
+    "level": 4,
+    "name": "Borders & neighbors",
+    "region": "Countries & borders",
+    "icon": "🗺️",
+    "prompt": "Which country shares a land border with the United States to the north?",
+    "options": [
+      "Mexico",
+      "Canada",
+      "Greenland",
+      "Cuba"
+    ],
+    "answer_index": 1,
+    "explanation": "Canada shares the world's longest international land border with the United States."
+  },
+  {
+    "id": "L5-Q2",
+    "level": 4,
+    "name": "Borders & neighbors",
+    "region": "Countries & borders",
+    "icon": "🗺️",
+    "prompt": "Which country is completely surrounded by South Africa?",
+    "options": [
+      "Eswatini",
+      "Lesotho",
+      "Botswana",
+      "Namibia"
+    ],
+    "answer_index": 1,
+    "explanation": "Lesotho is an enclave entirely surrounded by South Africa."
+  },
+  {
+    "id": "L5-Q3",
+    "level": 4,
+    "name": "Borders & neighbors",
+    "region": "Countries & borders",
+    "icon": "🗺️",
+    "prompt": "Which two countries share the Iberian Peninsula?",
+    "options": [
+      "France & Italy",
+      "Spain & Portugal",
+      "Spain & Andorra",
+      "Portugal & Morocco"
+    ],
+    "answer_index": 1,
+    "explanation": "Spain and Portugal occupy most of the Iberian Peninsula."
+  },
+  {
+    "id": "L5-Q4",
+    "level": 4,
+    "name": "Borders & neighbors",
+    "region": "Countries & borders",
+    "icon": "🗺️",
+    "prompt": "Which country borders both Germany and Spain?",
+    "options": [
+      "Belgium",
+      "Switzerland",
+      "France",
+      "Austria"
+    ],
+    "answer_index": 2,
+    "explanation": "France shares borders with both Germany and Spain."
+  },
+  {
+    "id": "L5-Q5",
+    "level": 4,
+    "name": "Borders & neighbors",
+    "region": "Countries & borders",
+    "icon": "🗺️",
+    "prompt": "Which country lies directly south of the United States?",
+    "options": [
+      "Guatemala",
+      "Mexico",
+      "Belize",
+      "Honduras"
+    ],
+    "answer_index": 1,
+    "explanation": "Mexico borders the United States to the south."
+  },
+  {
+    "id": "L5-Q6",
+    "level": 4,
+    "name": "Borders & neighbors",
+    "region": "Countries & borders",
+    "icon": "🗺️",
+    "prompt": "Which Scandinavian country shares a long land border with Sweden?",
+    "options": [
+      "Denmark",
+      "Norway",
+      "Iceland",
+      "Finland"
+    ],
+    "answer_index": 1,
+    "explanation": "Norway and Sweden share a long border on the Scandinavian Peninsula."
+  },
+  {
+    "id": "L5-Q7",
+    "level": 4,
+    "name": "Borders & neighbors",
+    "region": "Countries & borders",
+    "icon": "🗺️",
+    "prompt": "Which country has the most land borders with other countries (tied)?",
+    "options": [
+      "China",
+      "Brazil",
+      "Russia",
+      "India"
+    ],
+    "answer_index": 0,
+    "explanation": "China and Russia are tied, each bordering 14 countries."
+  },
+  {
+    "id": "L5-Q8",
+    "level": 4,
+    "name": "Borders & neighbors",
+    "region": "Countries & borders",
+    "icon": "🗺️",
+    "prompt": "Which country is an island nation just south of India?",
+    "options": [
+      "Maldives",
+      "Sri Lanka",
+      "Mauritius",
+      "Seychelles"
+    ],
+    "answer_index": 1,
+    "explanation": "Sri Lanka is separated from India by the Palk Strait and Gulf of Mannar."
+  },
+  {
+    "id": "L6-Q1",
+    "level": 5,
+    "name": "Around the tropics",
+    "region": "Climate & coordinates",
+    "icon": "🌴",
+    "prompt": "What imaginary line divides Earth into the Northern and Southern Hemispheres?",
+    "options": [
+      "Prime Meridian",
+      "Equator",
+      "Tropic of Cancer",
+      "International Date Line"
+    ],
+    "answer_index": 1,
+    "explanation": "The Equator is at 0 degrees latitude."
+  },
+  {
+    "id": "L6-Q2",
+    "level": 5,
+    "name": "Around the tropics",
+    "region": "Climate & coordinates",
+    "icon": "🌴",
+    "prompt": "The Prime Meridian passes through which London-area location?",
+    "options": [
+      "Greenwich",
+      "Wembley",
+      "Heathrow",
+      "Westminster"
+    ],
+    "answer_index": 0,
+    "explanation": "The 0-degree longitude line is defined through the Royal Observatory at Greenwich."
+  },
+  {
+    "id": "L6-Q3",
+    "level": 5,
+    "name": "Around the tropics",
+    "region": "Climate & coordinates",
+    "icon": "🌴",
+    "prompt": "Which continent is known as the driest inhabited continent?",
+    "options": [
+      "Asia",
+      "Africa",
+      "Australia",
+      "South America"
+    ],
+    "answer_index": 2,
+    "explanation": "Australia is the driest inhabited continent; Antarctica is drier but uninhabited."
+  },
+  {
+    "id": "L6-Q4",
+    "level": 5,
+    "name": "Around the tropics",
+    "region": "Climate & coordinates",
+    "icon": "🌴",
+    "prompt": "In which hemisphere is most of Brazil located?",
+    "options": [
+      "Northern",
+      "Southern",
+      "Eastern only",
+      "Western only"
+    ],
+    "answer_index": 1,
+    "explanation": "Most of Brazil lies south of the Equator, though part is north of it."
+  },
+  {
+    "id": "L6-Q5",
+    "level": 5,
+    "name": "Around the tropics",
+    "region": "Climate & coordinates",
+    "icon": "🌴",
+    "prompt": "What is the name for lines that run east-west and measure distance north or south?",
+    "options": [
+      "Longitude",
+      "Latitude",
+      "Elevation",
+      "Meridians"
+    ],
+    "answer_index": 1,
+    "explanation": "Latitude lines run east-west and measure position north or south of the Equator."
+  },
+  {
+    "id": "L6-Q6",
+    "level": 5,
+    "name": "Around the tropics",
+    "region": "Climate & coordinates",
+    "icon": "🌴",
+    "prompt": "Which climate zone is generally found around the Equator?",
+    "options": [
+      "Polar",
+      "Tropical",
+      "Arid",
+      "Continental"
+    ],
+    "answer_index": 1,
+    "explanation": "Equatorial regions are generally tropical, warm, and often humid."
+  },
+  {
+    "id": "L6-Q7",
+    "level": 5,
+    "name": "Around the tropics",
+    "region": "Climate & coordinates",
+    "icon": "🌴",
+    "prompt": "Which large country spans the most time zones when including its overseas regions?",
+    "options": [
+      "Russia",
+      "France",
+      "United States",
+      "China"
+    ],
+    "answer_index": 1,
+    "explanation": "France spans the most time zones when its overseas territories are counted."
+  },
+  {
+    "id": "L6-Q8",
+    "level": 5,
+    "name": "Around the tropics",
+    "region": "Climate & coordinates",
+    "icon": "🌴",
+    "prompt": "In which ocean are the Maldives located?",
+    "options": [
+      "Pacific",
+      "Atlantic",
+      "Indian",
+      "Arctic"
+    ],
+    "answer_index": 2,
+    "explanation": "The Maldives are an island country in the Indian Ocean."
+  },
+  {
+    "id": "L7-Q1",
+    "level": 6,
+    "name": "Islands & archipelagos",
+    "region": "Islands & seas",
+    "icon": "🏝️",
+    "prompt": "Which is the world's largest island, not counting continents?",
+    "options": [
+      "Borneo",
+      "Madagascar",
+      "Greenland",
+      "New Guinea"
+    ],
+    "answer_index": 2,
+    "explanation": "Greenland is the largest island; Australia is classified as a continent."
+  },
+  {
+    "id": "L7-Q2",
+    "level": 6,
+    "name": "Islands & archipelagos",
+    "region": "Islands & seas",
+    "icon": "🏝️",
+    "prompt": "The Hawaiian Islands are in which ocean?",
+    "options": [
+      "Atlantic",
+      "Pacific",
+      "Indian",
+      "Southern"
+    ],
+    "answer_index": 1,
+    "explanation": "Hawaii is an archipelago in the central Pacific Ocean."
+  },
+  {
+    "id": "L7-Q3",
+    "level": 6,
+    "name": "Islands & archipelagos",
+    "region": "Islands & seas",
+    "icon": "🏝️",
+    "prompt": "Which country is made up of thousands of islands, including Java and Sumatra?",
+    "options": [
+      "Philippines",
+      "Indonesia",
+      "Japan",
+      "Malaysia"
+    ],
+    "answer_index": 1,
+    "explanation": "Indonesia is a vast archipelago between the Indian and Pacific oceans."
+  },
+  {
+    "id": "L7-Q4",
+    "level": 6,
+    "name": "Islands & archipelagos",
+    "region": "Islands & seas",
+    "icon": "🏝️",
+    "prompt": "Madagascar lies off the southeastern coast of which continent?",
+    "options": [
+      "Asia",
+      "Africa",
+      "Australia",
+      "South America"
+    ],
+    "answer_index": 1,
+    "explanation": "Madagascar is in the Indian Ocean off the African mainland."
+  },
+  {
+    "id": "L7-Q5",
+    "level": 6,
+    "name": "Islands & archipelagos",
+    "region": "Islands & seas",
+    "icon": "🏝️",
+    "prompt": "Which sea separates the UK from mainland Europe at its narrowest point?",
+    "options": [
+      "Irish Sea",
+      "North Sea",
+      "English Channel",
+      "Baltic Sea"
+    ],
+    "answer_index": 2,
+    "explanation": "The English Channel separates southern England from northern France."
+  },
+  {
+    "id": "L7-Q6",
+    "level": 6,
+    "name": "Islands & archipelagos",
+    "region": "Islands & seas",
+    "icon": "🏝️",
+    "prompt": "The Galápagos Islands belong to which country?",
+    "options": [
+      "Colombia",
+      "Ecuador",
+      "Peru",
+      "Costa Rica"
+    ],
+    "answer_index": 1,
+    "explanation": "The Galápagos are an Ecuadorian archipelago in the Pacific."
+  },
+  {
+    "id": "L7-Q7",
+    "level": 6,
+    "name": "Islands & archipelagos",
+    "region": "Islands & seas",
+    "icon": "🏝️",
+    "prompt": "Which country is an archipelago east of China and the Korean Peninsula?",
+    "options": [
+      "Japan",
+      "Sri Lanka",
+      "Cuba",
+      "Iceland"
+    ],
+    "answer_index": 0,
+    "explanation": "Japan is an East Asian island country in the Pacific."
+  },
+  {
+    "id": "L7-Q8",
+    "level": 6,
+    "name": "Islands & archipelagos",
+    "region": "Islands & seas",
+    "icon": "🏝️",
+    "prompt": "The Caribbean island of Jamaica is part of which region?",
+    "options": [
+      "Central America",
+      "The Caribbean",
+      "Polynesia",
+      "Micronesia"
+    ],
+    "answer_index": 1,
+    "explanation": "Jamaica is an island country in the Caribbean Sea."
+  },
+  {
+    "id": "L8-Q1",
+    "level": 7,
+    "name": "World explorer finale",
+    "region": "Around the world",
+    "icon": "🧭",
+    "prompt": "Which country has a coastline on both the Atlantic and Indian Oceans?",
+    "options": [
+      "South Africa",
+      "Angola",
+      "Mozambique",
+      "Namibia"
+    ],
+    "answer_index": 0,
+    "explanation": "South Africa has coastlines on the Atlantic to the west and Indian Ocean to the east."
+  },
+  {
+    "id": "L8-Q2",
+    "level": 7,
+    "name": "World explorer finale",
+    "region": "Around the world",
+    "icon": "🧭",
+    "prompt": "What is the capital of Iceland?",
+    "options": [
+      "Oslo",
+      "Reykjavík",
+      "Helsinki",
+      "Tórshavn"
+    ],
+    "answer_index": 1,
+    "explanation": "Reykjavík is Iceland's capital, on the island's southwestern coast."
+  },
+  {
+    "id": "L8-Q3",
+    "level": 7,
+    "name": "World explorer finale",
+    "region": "Around the world",
+    "icon": "🧭",
+    "prompt": "Which strait connects the Mediterranean Sea to the Atlantic Ocean?",
+    "options": [
+      "Bering Strait",
+      "Strait of Gibraltar",
+      "Bosporus",
+      "Dover Strait"
+    ],
+    "answer_index": 1,
+    "explanation": "The Strait of Gibraltar separates Spain and Morocco."
+  },
+  {
+    "id": "L8-Q4",
+    "level": 7,
+    "name": "World explorer finale",
+    "region": "Around the world",
+    "icon": "🧭",
+    "prompt": "Which country is home to the city of Istanbul?",
+    "options": [
+      "Greece",
+      "Türkiye",
+      "Bulgaria",
+      "Georgia"
+    ],
+    "answer_index": 1,
+    "explanation": "Istanbul lies on both sides of the Bosporus in Türkiye."
+  },
+  {
+    "id": "L8-Q5",
+    "level": 7,
+    "name": "World explorer finale",
+    "region": "Around the world",
+    "icon": "🧭",
+    "prompt": "What is the capital of Brazil?",
+    "options": [
+      "Rio de Janeiro",
+      "São Paulo",
+      "Brasília",
+      "Salvador"
+    ],
+    "answer_index": 2,
+    "explanation": "Brasília became Brazil's capital in 1960."
+  },
+  {
+    "id": "L8-Q6",
+    "level": 7,
+    "name": "World explorer finale",
+    "region": "Around the world",
+    "icon": "🧭",
+    "prompt": "Which European river flows through Vienna, Bratislava, Budapest, and Belgrade?",
+    "options": [
+      "Rhine",
+      "Danube",
+      "Seine",
+      "Volga"
+    ],
+    "answer_index": 1,
+    "explanation": "The Danube flows through or along the borders of all four capital cities."
+  },
+  {
+    "id": "L8-Q7",
+    "level": 7,
+    "name": "World explorer finale",
+    "region": "Around the world",
+    "icon": "🧭",
+    "prompt": "Which country is home to the ancient city of Timbuktu?",
+    "options": [
+      "Mali",
+      "Niger",
+      "Chad",
+      "Senegal"
+    ],
+    "answer_index": 0,
+    "explanation": "Timbuktu is a historic city in Mali, near the southern edge of the Sahara."
+  },
+  {
+    "id": "L8-Q8",
+    "level": 7,
+    "name": "World explorer finale",
+    "region": "Around the world",
+    "icon": "🧭",
+    "prompt": "Which is the world's largest country by land area?",
+    "options": [
+      "Canada",
+      "China",
+      "United States",
+      "Russia"
+    ],
+    "answer_index": 3,
+    "explanation": "Russia spans eastern Europe and northern Asia."
+  }
+]

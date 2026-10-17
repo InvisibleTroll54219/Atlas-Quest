@@ -1,0 +1,233 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f4ee">
+  <title>Atlas Quest — Geography Trivia</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #172d3b;
+      --muted: #62727a;
+      --paper: #f5f4ee;
+      --card: #fffefa;
+      --line: #e7e6dc;
+      --green: #26745e;
+      --green-dark: #1d5949;
+      --mint: #dceee4;
+      --coral: #e98466;
+      --gold: #e9ba55;
+      --shadow: 0 18px 55px rgba(34, 55, 59, .08);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    * { box-sizing: border-box; }
+    body {
+      min-width: 320px;
+      min-height: 100vh;
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(ellipse at 88% 4%, rgba(220, 238, 228, .78), transparent 28rem),
+        var(--paper);
+    }
+    button { font: inherit; }
+    .shell { width: min(1080px, calc(100% - 40px)); margin: 0 auto; }
+    .topbar { display: flex; align-items: center; justify-content: space-between; padding: 24px 0 18px; }
+    .brand { display: inline-flex; align-items: center; gap: 10px; font-size: 16px; font-weight: 850; letter-spacing: -.04em; }
+    .brand-mark { display: grid; width: 36px; height: 36px; place-items: center; border-radius: 12px; color: #fff; background: var(--green); font-size: 20px; }
+    .top-actions { display: flex; align-items: center; gap: 10px; }
+    .icon-button, .pill {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      min-height: 38px; padding: 0 13px; border: 1px solid var(--line); border-radius: 999px;
+      color: var(--ink); background: rgba(255,255,255,.7); font-size: 13px; font-weight: 700;
+    }
+    .icon-button { cursor: pointer; }
+    .icon-button:hover { border-color: #b7cfc3; background: white; }
+    .hero { display: grid; grid-template-columns: 1fr 240px; align-items: center; gap: 24px; padding: 34px 0 26px; }
+    .eyebrow { color: var(--green); font-size: 11px; font-weight: 850; letter-spacing: .17em; text-transform: uppercase; }
+    h1 { margin: 8px 0 10px; font-size: clamp(35px, 5vw, 54px); line-height: 1.04; letter-spacing: -.065em; }
+    .hero p { max-width: 590px; margin: 0; color: var(--muted); font-size: 15px; line-height: 1.65; }
+    .hero-art { position: relative; display: grid; height: 156px; place-items: center; overflow: hidden; border: 1px solid #e2e8d9; border-radius: 26px; background: linear-gradient(145deg, #e8f0de, #d3e9dd); }
+    .hero-art::before, .hero-art::after { position: absolute; content: ""; border: 1px solid rgba(38,116,94,.19); border-radius: 50%; }
+    .hero-art::before { width: 156px; height: 156px; }
+    .hero-art::after { width: 110px; height: 110px; }
+    .globe { z-index: 1; font-size: 77px; filter: drop-shadow(0 8px 7px rgba(43,91,72,.13)); }
+    .orbit { position: absolute; z-index: 2; font-size: 22px; }
+    .orbit.one { top: 19px; right: 49px; }
+    .orbit.two { bottom: 17px; left: 38px; font-size: 18px; }
+    .stats { display: flex; gap: 10px; margin: 4px 0 22px; }
+    .stat { display: flex; min-width: 118px; align-items: center; gap: 9px; padding: 10px 13px; border: 1px solid var(--line); border-radius: 14px; background: rgba(255,255,255,.63); }
+    .stat-icon { font-size: 19px; }
+    .stat strong { display: block; font-size: 14px; line-height: 1.1; }
+    .stat small { display: block; margin-top: 3px; color: var(--muted); font-size: 10px; }
+    .layout { display: grid; grid-template-columns: minmax(0, 1fr) 286px; align-items: start; gap: 22px; padding-bottom: 48px; }
+    .card { border: 1px solid var(--line); border-radius: 22px; background: var(--card); box-shadow: var(--shadow); }
+    .game-card { min-height: 505px; padding: 25px; }
+    .stage-head { display: flex; align-items: center; justify-content: space-between; gap: 14px; }
+    .stage-title { display: flex; align-items: center; gap: 13px; }
+    .stage-emoji { display: grid; width: 48px; height: 48px; place-items: center; border-radius: 16px; background: #f0efe4; font-size: 25px; }
+    .stage-title h2 { margin: 0 0 4px; font-size: 17px; letter-spacing: -.035em; }
+    .stage-title p { margin: 0; color: var(--muted); font-size: 12px; }
+    .level-tag { flex: 0 0 auto; padding: 7px 10px; border-radius: 9px; color: var(--green-dark); background: var(--mint); font-size: 11px; font-weight: 800; }
+    .progress-meta { display: flex; justify-content: space-between; margin: 24px 0 8px; color: var(--muted); font-size: 11px; font-weight: 700; }
+    .progress-track { height: 7px; overflow: hidden; border-radius: 10px; background: #eeeee7; }
+    .progress-fill { width: 0; height: 100%; border-radius: inherit; background: var(--green); transition: width .35s ease; }
+    .question-wrap { padding: 28px 0 10px; }
+    .question-kicker { color: var(--coral); font-size: 10px; font-weight: 850; letter-spacing: .14em; text-transform: uppercase; }
+    .question { max-width: 630px; min-height: 70px; margin: 10px 0 20px; font-size: clamp(21px, 3vw, 27px); line-height: 1.25; letter-spacing: -.045em; }
+    .answers { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .answer {
+      display: flex; min-height: 58px; align-items: center; gap: 11px; padding: 11px 13px;
+      border: 1px solid var(--line); border-radius: 13px; color: var(--ink); background: #fff;
+      text-align: left; cursor: pointer; transition: border-color .15s, background .15s, transform .15s;
+    }
+    .answer:not(:disabled):hover { transform: translateY(-2px); border-color: #99c3ae; background: #f7fbf8; }
+    .answer:focus-visible, .icon-button:focus-visible, .primary:focus-visible, .text-button:focus-visible { outline: 3px solid rgba(38,116,94,.28); outline-offset: 2px; }
+    .answer:disabled { cursor: default; }
+    .answer-letter { display: grid; width: 28px; height: 28px; flex: 0 0 28px; place-items: center; border-radius: 8px; color: #64757a; background: #f3f3ee; font-size: 11px; font-weight: 850; }
+    .answer-label { font-size: 13px; font-weight: 700; line-height: 1.35; }
+    .answer.correct { border-color: #80b89b; background: #edf7ef; }
+    .answer.correct .answer-letter { color: white; background: var(--green); }
+    .answer.incorrect { border-color: #e9a28f; background: #fff3ef; }
+    .answer.incorrect .answer-letter { color: white; background: #d86f58; }
+    .answer.eliminated { visibility: hidden; pointer-events: none; }
+    .feedback { min-height: 54px; margin-top: 14px; padding: 12px 14px; border-radius: 12px; color: var(--muted); background: #f6f5ef; font-size: 12px; line-height: 1.5; }
+    .feedback strong { color: var(--ink); }
+    .feedback.good { color: #285b43; background: #edf7ef; }
+    .feedback.bad { color: #814638; background: #fff3ef; }
+    .game-footer { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 14px; }
+    .text-button { padding: 8px 0; border: 0; color: var(--green); background: transparent; font-size: 12px; font-weight: 800; cursor: pointer; }
+    .text-button:disabled { color: #a6b1aa; cursor: default; }
+    .primary { min-height: 42px; padding: 0 17px; border: 0; border-radius: 11px; color: white; background: var(--green); font-size: 12px; font-weight: 800; cursor: pointer; transition: background .15s, transform .15s; }
+    .primary:not(:disabled):hover { transform: translateY(-1px); background: var(--green-dark); }
+    .primary:disabled { background: #b9c7bf; cursor: default; }
+    .side { display: grid; gap: 14px; }
+    .side-card { padding: 18px; }
+    .side-card h3 { display: flex; align-items: center; justify-content: space-between; margin: 0 0 14px; font-size: 13px; letter-spacing: -.02em; }
+    .side-card h3 span { color: var(--muted); font-size: 10px; font-weight: 650; }
+    .mission { display: flex; gap: 10px; padding: 12px; border-radius: 13px; background: #f6f5ef; }
+    .mission-icon { font-size: 20px; }
+    .mission strong { display: block; margin-bottom: 4px; font-size: 12px; }
+    .mission p { margin: 0; color: var(--muted); font-size: 10px; line-height: 1.5; }
+    .stage-list { display: grid; gap: 7px; }
+    .stage-item { display: flex; width: 100%; align-items: center; gap: 10px; padding: 9px 10px; border: 1px solid transparent; border-radius: 11px; color: var(--ink); background: transparent; text-align: left; cursor: pointer; }
+    .stage-item:hover:not(:disabled) { background: #f7f7f1; }
+    .stage-item.active { border-color: #c9e0d3; background: #eff7f0; }
+    .stage-item:disabled { opacity: .46; cursor: not-allowed; }
+    .stage-item .stage-small-icon { font-size: 18px; }
+    .stage-item strong { display: block; font-size: 11px; }
+    .stage-item small { display: block; margin-top: 3px; color: var(--muted); font-size: 9px; }
+    .stage-status { margin-left: auto; color: var(--green); font-size: 13px; font-weight: 900; }
+    .toast-note { padding: 12px; border-radius: 12px; color: #53645c; background: #f5f5ef; font-size: 10px; line-height: 1.55; }
+    .overlay { position: fixed; z-index: 5; inset: 0; display: grid; place-items: center; padding: 20px; background: rgba(22,42,48,.46); }
+    .dialog { width: min(450px, 100%); padding: 30px; border: 1px solid var(--line); border-radius: 22px; background: var(--card); box-shadow: 0 22px 80px rgba(0,0,0,.2); text-align: center; animation: pop .2s ease-out; }
+    @keyframes pop { from { opacity: .5; transform: translateY(8px) scale(.98); } to { opacity: 1; transform: none; } }
+    .dialog-emoji { font-size: 46px; }
+    .dialog h2 { margin: 10px 0 7px; font-size: 26px; letter-spacing: -.05em; }
+    .dialog p { margin: 0 0 19px; color: var(--muted); font-size: 13px; line-height: 1.6; }
+    .dialog .primary { min-width: 150px; }
+    .modal-close { float: right; padding: 5px 9px; border: 0; border-radius: 8px; background: #f2f1e9; cursor: pointer; }
+    .hidden { display: none !important; }
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+    footer { padding: 0 0 28px; color: #83908d; font-size: 10px; text-align: center; }
+    @media (max-width: 760px) {
+      .hero { grid-template-columns: 1fr; padding-top: 26px; }
+      .hero-art { display: none; }
+      .layout { grid-template-columns: 1fr; }
+      .side { grid-template-columns: 1fr 1fr; align-items: start; }
+      .side-card:last-child { grid-column: 1 / -1; }
+    }
+    @media (max-width: 520px) {
+      .shell { width: min(100% - 24px, 1080px); }
+      .topbar { padding-top: 15px; }
+      .pill { min-height: 34px; padding: 0 9px; font-size: 11px; }
+      .hero { padding: 22px 0 18px; }
+      .hero p { font-size: 13px; }
+      .stats { gap: 7px; }
+      .stat { min-width: 0; flex: 1; padding: 9px; }
+      .stat small { font-size: 9px; }
+      .game-card { min-height: 0; padding: 17px; border-radius: 18px; }
+      .stage-emoji { width: 42px; height: 42px; border-radius: 13px; }
+      .stage-title h2 { font-size: 15px; }
+      .stage-title p { font-size: 10px; }
+      .level-tag { padding: 6px 8px; font-size: 9px; }
+      .question-wrap { padding-top: 23px; }
+      .question { min-height: 0; font-size: 22px; }
+      .answers { grid-template-columns: 1fr; gap: 8px; }
+      .answer { min-height: 50px; }
+      .side { grid-template-columns: 1fr; }
+      .side-card:last-child { grid-column: auto; }
+      .feedback { min-height: 50px; }
+    }
+    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; transition-duration: .01ms !important; } }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <header class="topbar">
+      <div class="brand"><span class="brand-mark" aria-hidden="true">⌖</span> atlas quest</div>
+      <div class="top-actions">
+        <div class="pill" aria-label="Current score">⭐ <span id="score">0</span> pts</div>
+        <button class="icon-button" id="help-button" type="button" aria-label="How to play">? Help</button>
+        <button class="icon-button" id="reset-button" type="button" title="Reset saved game">↻ <span>Reset</span></button>
+      </div>
+    </header>
+    <section class="hero" aria-labelledby="page-title">
+      <div>
+        <div class="eyebrow">A little knowledge goes a long way</div>
+        <h1 id="page-title">The world is<br>your playing field.</h1>
+        <p>Travel from continent to continent, collect map knowledge, and prove your geography chops. Clear each level's goal to unlock the next destination.</p>
+      </div>
+      <div class="hero-art" aria-hidden="true"><span class="globe">🌍</span><span class="orbit one">✦</span><span class="orbit two">✈️</span></div>
+    </section>
+    <section class="stats" aria-label="Player stats">
+      <div class="stat"><span class="stat-icon">🧭</span><div><strong id="levels-stat">0 / 8</strong><small>levels cleared</small></div></div>
+      <div class="stat"><span class="stat-icon">🔥</span><div><strong id="streak-stat">0</strong><small>best streak</small></div></div>
+      <div class="stat"><span class="stat-icon">🎯</span><div><strong id="correct-stat">0</strong><small>correct answers</small></div></div>
+    </section>
+    <main class="layout">
+      <section class="card game-card" aria-label="Trivia game">
+        <div class="stage-head">
+          <div class="stage-title"><div class="stage-emoji" id="stage-emoji" aria-hidden="true">🌍</div><div><h2 id="stage-name">Loading…</h2><p id="stage-subtitle"></p></div></div>
+          <div class="level-tag" id="level-tag">LEVEL 1</div>
+        </div>
+        <div class="progress-meta"><span id="question-count">Question 1 of 5</span><span id="goal-count">Goal: 4 correct</span></div>
+        <div class="progress-track" role="progressbar" aria-label="Level progress" aria-valuemin="0" aria-valuemax="5" aria-valuenow="0"><div class="progress-fill" id="progress-fill"></div></div>
+        <div class="question-wrap">
+          <div class="question-kicker" id="question-category">World geography</div>
+          <h3 class="question" id="question-text">Getting your compass ready…</h3>
+          <div class="answers" id="answers" role="group" aria-label="Answer choices"></div>
+          <div class="feedback" id="feedback" aria-live="polite">Choose your answer. You need 4 correct answers out of 5 to clear this level.</div>
+          <div class="game-footer">
+            <button class="text-button" id="hint-button" type="button">✦ Use a hint <span id="hint-status"></span></button>
+            <button class="primary" id="next-button" type="button" disabled>Lock it in →</button>
+          </div>
+        </div>
+      </section>
+      <aside class="side">
+        <section class="card side-card">
+          <h3>Your mission <span>THIS LEVEL</span></h3>
+          <div class="mission"><span class="mission-icon">🏁</span><div><strong>Clear the destination</strong><p>Answer at least 4 of 5 questions correctly. Every right answer earns 100 points.</p></div></div>
+          <div style="height:9px"></div>
+          <div class="mission"><span class="mission-icon">💡</span><div><strong>Need a nudge?</strong><p>Use one hint per level to remove two incorrect choices. Hints don't cost points.</p></div></div>
+        </section>
+        <section class="card side-card">
+          <h3>Expedition map <span id="map-progress">0 / 8</span></h3>
+          <div class="stage-list" id="stage-list" aria-label="Levels"></div>
+        </section>
+        <div class="toast-note">Progress is saved to this server's local SQLite database. Revisit any destination you've already unlocked to sharpen your map skills.</div>
+      </aside>
+    </main>
+    <footer>Made for curious minds · No passport required</footer>
+  </div>
+  <div class="overlay hidden" id="overlay" role="dialog" aria-modal="true" aria-labelledby="dialog-title">
+    <div class="dialog"><div class="dialog-emoji" id="dialog-emoji">🎉</div><h2 id="dialog-title">Destination cleared!</h2><p id="dialog-copy"></p><button class="primary" id="dialog-button" type="button">Continue expedition</button></div>
+  </div>
+  <div class="overlay hidden" id="help-overlay" role="dialog" aria-modal="true" aria-labelledby="help-title">
+    <div class="dialog" style="text-align:left"><button class="modal-close" id="close-help" aria-label="Close help">✕</button><div class="eyebrow">How to play</div><h2 id="help-title">Your expedition guide</h2><p>Each destination is a five-question round. Get four or more right to clear the level and unlock the next one. Correct answers earn 100 points; build a streak by answering correctly in a row.</p><p>Tap <strong>Use a hint</strong> once per round to remove two wrong choices. It won't affect your score. If you miss the goal, you can try the same level again with a fresh set of questions.</p><p>Your cleared levels, best streak, and total score are saved in this browser's server session and a local SQLite database. Reset erases that saved progress.</p><button class="primary" id="help-ok" type="button">Got it</button></div>
+  </div>
+  <script src="{% static 'game.js' %}" defer></script>
+</body>
+</html>
