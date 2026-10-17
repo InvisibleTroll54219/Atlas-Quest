@@ -20,7 +20,7 @@ For a LAN-accessible development server, run `python manage.py runserver 0.0.0.0
 
 ## Deploying to Vercel
 
-Vercel detects this Django project from `manage.py`. Before deploying, configure these environment variables for the Vercel project:
+Vercel detects this Django project from `manage.py` and its WSGI setting. `.python-version` pins the Vercel runtime to Python 3.12, which is supported by the project's Django 4.2 dependency. `vercel.json` intentionally does not declare a `functions` pattern: Vercel's Django integration creates the application function itself, and a custom pattern for `atlasquest/wsgi.py` does not match an `api/` function. Before deploying, configure these environment variables for the Vercel project:
 
 - `DJANGO_SECRET_KEY`: a long, random secret value. Generate one with `python -c 'import secrets; print(secrets.token_urlsafe(50))'`.
 - `DATABASE_URL`: the connection URL from a persistent PostgreSQL provider/integration. `POSTGRES_URL` is also accepted. Vercel's build command runs `scripts/vercel_build.py` to apply database migrations, so the database URL must be available to the deployment build as well as the function.
