@@ -18,11 +18,22 @@ async function api(url, options = {}) {
     headers["X-CSRFToken"] = getCookie("csrftoken");
   }
   const response = await fetch(url, { ...options, headers, credentials: "same-origin" });
+  const responseBody = await response.text();
   let data;
   try {
-    data = await response.json();
+    data = JSON.parse(responseBody);
   } catch (error) {
-    throw new Error("The game server returned an unreadable response.");
+    const detail = responseBody
+      .replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi, " ")
+      .replace(/<style\b[^>]*>[\s\S]*?<\/style>/gi, " ")
+      .replace(/<[^>]+>/g, " ")
+      .replace(/\s+/g, " ")
+      .trim()
+      .slice(0, 220);
+    const status = `HTTP ${response.status}${response.statusText ? ` ${response.statusText}` : ""}`;
+    throw new Error(detail
+      ? `The game server returned ${status} instead of JSON: ${detail}`
+      : `The game server returned ${status} instead of JSON.`);
   }
   if (!response.ok) throw new Error(data.error || `The server returned ${response.status}.`);
   return data;
@@ -156,7 +167,9 @@ async function selectAnswer(index) {
       body: JSON.stringify({ question_id: question.id, selected_index: index }),
     });
     const buttons = [...$("answers").children];
-    buttons[result.correct_index].classList.add("correct");
+    result.correct_indices.forEach((correctIndex) => {
+      buttons[correctIndex].classList.add("correct");
+    });
     if (!result.correct) buttons[index].classList.add("incorrect");
     state.score = result.score;
     state.correct_answers += result.correct ? 1 : 0;

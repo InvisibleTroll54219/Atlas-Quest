@@ -620,6 +620,10 @@
       "Russia",
       "India"
     ],
+    "answer_indices": [
+      0,
+      2
+    ],
     "answer_index": 0,
     "explanation": "China and Russia are tied, each bordering 14 countries."
   },

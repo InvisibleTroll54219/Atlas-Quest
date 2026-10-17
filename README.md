@@ -18,6 +18,16 @@ Open the game at the Django URL above, not by opening `index.html` directly. The
 
 For a LAN-accessible development server, run `python manage.py runserver 0.0.0.0:8000` and add the host address to `ALLOWED_HOSTS` in `atlasquest/settings.py`. The included settings and secret key are for local development, not public deployment.
 
+## Deploying to Vercel
+
+Vercel detects this Django project from `manage.py`. Before deploying, configure these environment variables for the Vercel project:
+
+- `DJANGO_SECRET_KEY`: a long, random secret value. Generate one with `python -c 'import secrets; print(secrets.token_urlsafe(50))'`.
+- `DATABASE_URL`: the connection URL from a persistent PostgreSQL provider/integration. `POSTGRES_URL` is also accepted. Vercel's build command runs `scripts/vercel_build.py` to apply database migrations, so the database URL must be available to the deployment build as well as the function.
+- `DJANGO_ALLOWED_HOSTS` (optional): comma-separated custom host names if you use a domain outside `*.vercel.app`.
+
+The preview and production deployments should use their intended database environment variables. SQLite is only the local-development default: serverless Vercel filesystems are not durable, so a SQLite file cannot reliably preserve player progress there. If the Vercel page shows an API error, inspect the Vercel function/build logs; the game now includes the HTTP status and a short sanitized response detail when an API responds with HTML instead of JSON.
+
 ## Gameplay
 
 - There are eight themed destinations. Each round has five randomly selected questions and requires four correct answers to clear.
@@ -36,7 +46,7 @@ For a LAN-accessible development server, run `python manage.py runserver 0.0.0.0
   python scripts/generate_question_bank.py
   ```
 
-  Each fact uses `id`, `level` (zero-based), `name`, `region`, `icon`, `prompt`, four `options`, zero-based `answer_index`, and `explanation`. Keep at least five facts in each level so a round can be generated without repeating a fact.
+  Each fact uses `id`, `level` (zero-based), `name`, `region`, `icon`, `prompt`, four `options`, `answer_index` for a single correct option or `answer_indices` for multiple correct options, and `explanation`. Answer indices are zero-based. Keep at least five facts in each level so a round can be generated without repeating a fact.
 - `index.html` contains the game template and `static/game.js` contains its interactive client. `game/views.py` implements the JSON API; `game/models.py` stores player progress.
 
 The 12,288 pool entries are answer-order/prompt variants of the 64 authored facts, not 12,288 independent geographic facts. This keeps the pool large and varied without inventing unverified trivia.

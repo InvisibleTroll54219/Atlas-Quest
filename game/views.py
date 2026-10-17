@@ -121,7 +121,12 @@ def submit_answer(request):
     if question is None or selected_index < 0 or selected_index >= len(question["options"]):
         return JsonResponse({"error": "That answer choice is not valid."}, status=400)
 
-    is_correct = selected_index == question["answer_index"]
+    correct_indices = (
+        question["answer_indices"]
+        if "answer_indices" in question
+        else [question["answer_index"]]
+    )
+    is_correct = selected_index in correct_indices
     with transaction.atomic():
         progress = _get_progress(request)
         if is_correct:
@@ -157,7 +162,7 @@ def submit_answer(request):
 
     response = {
         "correct": is_correct,
-        "correct_index": question["answer_index"],
+        "correct_indices": correct_indices,
         "explanation": question["explanation"],
         "score": progress.score,
         "current_streak": progress.current_streak,

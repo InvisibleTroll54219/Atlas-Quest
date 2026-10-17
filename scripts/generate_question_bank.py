@@ -25,6 +25,11 @@ def build_question_bank():
     facts = json.loads(FACTS_PATH.read_text(encoding="utf-8"))
     questions = []
     for fact in facts:
+        correct_indices = (
+            fact["answer_indices"]
+            if "answer_indices" in fact
+            else [fact["answer_index"]]
+        )
         for frame_index, frame in enumerate(PROMPT_FRAMES):
             for permutation_index, permutation in enumerate(
                 itertools.permutations(range(len(fact["options"])))
@@ -42,7 +47,10 @@ def build_question_bank():
                         "icon": fact["icon"],
                         "prompt": frame.format(fact["prompt"]),
                         "options": choices,
-                        "answer_index": permutation.index(fact["answer_index"]),
+                        "answer_indices": [
+                            permutation.index(correct_index)
+                            for correct_index in correct_indices
+                        ],
                         "explanation": fact["explanation"],
                     }
                 )
