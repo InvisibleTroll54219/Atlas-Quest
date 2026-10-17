@@ -1,9 +1,4 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "buildCommand": "python scripts/vercel_build.py",
-  "functions": {
-    "atlasquest/wsgi.py": {
-      "includeFiles": "data/**"
-    }
-  }
+  "buildCommand": "python scripts/vercel_build.py"
 }
