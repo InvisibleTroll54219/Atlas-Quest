@@ -8,7 +8,11 @@ from django.views.decorators.csrf import ensure_csrf_cookie
 from django.views.decorators.http import require_GET, require_POST
 
 from .models import PlayerProgress
-from .question_bank import get_levels, get_questions_by_id, get_questions_by_level
+from .question_bank import (
+    create_question_variant,
+    get_levels,
+    get_questions_by_level,
+)
 
 
 QUESTIONS_PER_ROUND = 5
@@ -22,6 +26,18 @@ def _get_progress(request):
     progress, _ = PlayerProgress.objects.get_or_create(
         session_key=request.session.session_key
     )
+    if progress.campaign_version < 2:
+        progress.campaign_version = 2
+        progress.unlocked_level = 0
+        progress.cleared_levels = []
+        progress.save(
+            update_fields=[
+                "campaign_version",
+                "unlocked_level",
+                "cleared_levels",
+                "updated_at",
+            ]
+        )
     return progress
 
 
@@ -29,6 +45,7 @@ def _progress_payload(progress):
     return {
         "unlocked_level": progress.unlocked_level,
         "cleared_levels": progress.cleared_levels,
+        "level_best_scores": progress.level_best_scores,
         "score": progress.score,
         "correct_answers": progress.correct_answers,
         "best_streak": progress.best_streak,
@@ -72,10 +89,20 @@ def start_round(request):
         return JsonResponse({"error": "This level does not have enough questions."}, status=500)
 
     selected_groups = random.sample(list(fact_groups.values()), QUESTIONS_PER_ROUND)
-    selected_questions = [random.choice(group) for group in selected_groups]
+    selected_questions = [
+        create_question_variant(random.choice(group)) for group in selected_groups
+    ]
     request.session["active_round"] = {
         "level": level_index,
         "question_ids": [question["id"] for question in selected_questions],
+        "question_answers": {
+            question["id"]: {
+                "answer_indices": question["answer_indices"],
+                "explanation": question["explanation"],
+                "option_count": len(question["options"]),
+            }
+            for question in selected_questions
+        },
         "answered_ids": [],
         "correct": 0,
         "complete": False,
@@ -117,15 +144,14 @@ def submit_answer(request):
     if question_id in active_round["answered_ids"]:
         return JsonResponse({"error": "That question has already been answered."}, status=409)
 
-    question = get_questions_by_id().get(question_id)
-    if question is None or selected_index < 0 or selected_index >= len(question["options"]):
+    question_answers = active_round.get("question_answers")
+    if not isinstance(question_answers, dict):
+        return JsonResponse({"error": "Start a new round before submitting an answer."}, status=409)
+    question = question_answers.get(question_id)
+    if question is None or selected_index < 0 or selected_index >= question["option_count"]:
         return JsonResponse({"error": "That answer choice is not valid."}, status=400)
 
-    correct_indices = (
-        question["answer_indices"]
-        if "answer_indices" in question
-        else [question["answer_index"]]
-    )
+    correct_indices = question["answer_indices"]
     is_correct = selected_index in correct_indices
     with transaction.atomic():
         progress = _get_progress(request)
@@ -142,9 +168,18 @@ def submit_answer(request):
         round_complete = len(active_round["answered_ids"]) == QUESTIONS_PER_ROUND
         cleared = False
         newly_cleared = False
+        new_best_score = False
         if round_complete:
             active_round["complete"] = True
             cleared = active_round["correct"] >= ROUND_GOAL
+            level_best_scores = dict(progress.level_best_scores)
+            level_key = str(active_round["level"])
+            previous_best_score = level_best_scores.get(level_key, 0)
+            new_best_score = active_round["correct"] > previous_best_score
+            level_best_scores[level_key] = max(
+                previous_best_score, active_round["correct"]
+            )
+            progress.level_best_scores = level_best_scores
             if cleared:
                 cleared_levels = list(progress.cleared_levels)
                 newly_cleared = active_round["level"] not in cleared_levels
@@ -175,9 +210,12 @@ def submit_answer(request):
                 "cleared": cleared,
                 "newly_cleared": newly_cleared,
                 "correct_in_round": active_round["correct"],
+                "best_score": progress.level_best_scores[str(active_round["level"])],
+                "new_best_score": new_best_score,
                 "goal": ROUND_GOAL,
                 "unlocked_level": progress.unlocked_level,
                 "cleared_levels": progress.cleared_levels,
+                "level_best_scores": progress.level_best_scores,
                 "all_cleared": len(progress.cleared_levels) == len(get_levels()),
             }
         )

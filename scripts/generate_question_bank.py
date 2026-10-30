@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
-"""Build a reproducible question-instance pool from the authored geography facts."""
+"""Build the compact runtime question bank from the geography fact source."""
 
-import itertools
 import json
 from pathlib import Path
 
@@ -9,58 +8,45 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 FACTS_PATH = ROOT / "data" / "facts.json"
 OUTPUT_PATH = ROOT / "data" / "questions.json"
-PROMPT_FRAMES = (
-    "{}",
-    "Atlas check: {}",
-    "Quick globe challenge: {}",
-    "Expedition question: {}",
-    "Map room: {}",
-    "Navigator's quiz: {}",
-    "On this leg of the journey: {}",
-    "Test your world knowledge: {}",
-)
 
 
 def build_question_bank():
     facts = json.loads(FACTS_PATH.read_text(encoding="utf-8"))
     questions = []
+    seen_ids = set()
     for fact in facts:
+        if fact["id"] in seen_ids:
+            raise ValueError("Duplicate fact ID: {}".format(fact["id"]))
+        seen_ids.add(fact["id"])
         correct_indices = (
             fact["answer_indices"]
             if "answer_indices" in fact
             else [fact["answer_index"]]
         )
-        for frame_index, frame in enumerate(PROMPT_FRAMES):
-            for permutation_index, permutation in enumerate(
-                itertools.permutations(range(len(fact["options"])))
-            ):
-                choices = [fact["options"][index] for index in permutation]
-                questions.append(
-                    {
-                        "id": "{}-{:02d}-{:02d}".format(
-                            fact["id"], frame_index, permutation_index
-                        ),
-                        "fact_id": fact["id"],
-                        "level": fact["level"],
-                        "name": fact["name"],
-                        "region": fact["region"],
-                        "icon": fact["icon"],
-                        "prompt": frame.format(fact["prompt"]),
-                        "options": choices,
-                        "answer_indices": [
-                            permutation.index(correct_index)
-                            for correct_index in correct_indices
-                        ],
-                        "explanation": fact["explanation"],
-                    }
-                )
+        question = {
+            key: value
+            for key, value in fact.items()
+            if key not in {"answer_index", "answer_indices"}
+        }
+        question.update(
+            {
+                "fact_id": fact["id"],
+                "answer_indices": correct_indices,
+            }
+        )
+        questions.append(question)
     return questions
 
 
 if __name__ == "__main__":
     bank = build_question_bank()
     OUTPUT_PATH.write_text(
-        json.dumps(bank, ensure_ascii=False, separators=(",", ":")) + "\n",
+        "[\n  "
+        + ",\n  ".join(
+            json.dumps(question, ensure_ascii=False, separators=(",", ":"))
+            for question in bank
+        )
+        + "\n]\n",
         encoding="utf-8",
     )
-    print("Wrote {:,} question variants to {}".format(len(bank), OUTPUT_PATH))
+    print("Wrote {:,} distinct questions to {}".format(len(bank), OUTPUT_PATH))

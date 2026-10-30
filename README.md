@@ -1,6 +1,6 @@
 # Atlas Quest
 
-Atlas Quest is a geography-trivia game served by Django. It keeps the original responsive game interface, draws each round from a separate 12,288-entry question pool, and stores each player's progress in a local SQLite database.
+Atlas Quest is a geography-trivia game served by Django. It keeps the original responsive game interface, draws each round from a 6,400-fact question bank, and stores each player's progress in a local SQLite database.
 
 ## Start the game
 
@@ -30,26 +30,38 @@ The preview and production deployments should use their intended database enviro
 
 ## Gameplay
 
-- There are eight themed destinations. Each round has five randomly selected questions and requires four correct answers to clear.
+- The first screen introduces the expedition and its five-question quiz format. Choose **Begin your journey** to open the rotating globe and level selector.
+- The home screen is an interactive, mouse- and touch-rotatable globe. Select a lit continent pin or its accessible region button to open that continent's quiz.
+- The globe uses 1:50-million-scale Natural Earth coastline, lake, and international-boundary geometry, rendered on an orthographic projection with graticule lines. Natural Earth map data is public domain; the bundled geometry is in `static/world-land.json`, `static/world-lakes.json`, and `static/world-borders.json`.
+- The campaign progresses through Africa, Asia, Europe, North America, South America, Oceania, and Antarctica. Each quiz has five randomly selected questions and requires four correct answers to unlock the next continent.
+- The globe and level list distinguish ready, attempted, passed, and perfect destinations. A best result of 4/5 is amber; a perfect 5/5 is green. Best results persist and passed quizzes can be replayed to earn a perfect score.
+- Clearing all seven continents unlocks the World Challenge. Cleared quizzes can be replayed, and missed rounds can be retried with a fresh selection.
+- Existing saves keep their score and streak stats, while their old theme-based unlocks restart at Africa so continent progress stays accurate.
 - Every correct answer awards 100 points. Current and best consecutive-answer streaks are tracked.
 - One hint per round removes two incorrect choices without a score penalty.
-- Clearing a level unlocks the next destination. Unlocked destinations are replayable; missed rounds can be retried with a fresh selection.
 - The browser sends answer selections to Django; the correct answer and explanation are not included in the question-delivery response.
 
 ## Question pool and editing
 
-- `data/facts.json` is the authored source set: 64 underlying geography facts, eight per level.
-- `data/questions.json` is the separate, ready-to-serve pool of 12,288 question instances. Each fact has eight prompt framings and all 24 answer-choice orders, so rounds can select different question variants while avoiding duplicate facts in the same round.
-- To edit or add facts, update `data/facts.json`, then rebuild the pool with:
+- `data/facts.json` is the fact source: 64 authored geography facts plus 6,336 distinct populated-place facts from GeoNames, for 6,400 total (100 times the original bank). The six inhabited-continent quizzes have 800 facts each, Antarctica retains its eight authored facts, and the World Challenge has 1,592.
+- `data/questions.json` is the compact runtime bank with one entry per distinct fact. Prompt framing and answer order are randomized when a round starts, avoiding a large pre-generated variants file while keeping five different facts per round.
+- To refresh the GeoNames facts, run:
+
+  ```bash
+  python scripts/import_geonames_questions.py
+  ```
+
+- The importer downloads GeoNames `cities5000.zip`, `countryInfo.txt`, and `admin1CodesASCII.txt` from the [GeoNames export dump](https://download.geonames.org/export/dump/). GeoNames data is licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/); the imported facts retain their GeoNames IDs and source labels. The imported choices use the correct country and plausible country distractors from the same continent, or from around the world in the World Challenge.
+- To edit facts, update `data/facts.json`; then rebuild the runtime bank with:
 
   ```bash
   python scripts/generate_question_bank.py
   ```
 
-  Each fact uses `id`, `level` (zero-based), `name`, `region`, `icon`, `prompt`, four `options`, `answer_index` for a single correct option or `answer_indices` for multiple correct options, and `explanation`. Answer indices are zero-based. Keep at least five facts in each level so a round can be generated without repeating a fact.
+  Each fact uses `id`, `level` (zero-based), `continent`, `name`, `region`, `icon`, `prompt`, four `options`, `answer_index` for a single correct option or `answer_indices` for multiple correct options, and `explanation`. Answer indices are zero-based. Keep at least five facts in each level so a round can be generated without repeating a fact.
 - `index.html` contains the game template and `static/game.js` contains its interactive client. `game/views.py` implements the JSON API; `game/models.py` stores player progress.
 
-The 12,288 pool entries are answer-order/prompt variants of the 64 authored facts, not 12,288 independent geographic facts. This keeps the pool large and varied without inventing unverified trivia.
+GeoNames is a geographic database of populated places and administrative regions. The imported questions ask players to identify the country containing a named place; they supplement, rather than replace, the authored landmark, physical-geography, and Antarctica questions.
 
 ## Database and API
 
@@ -68,5 +80,5 @@ Run the automated tests with:
 python manage.py test
 ```
 
-The tests cover the question pool size and uniqueness, round selection, locked-level access, answer scoring, level unlocking, duplicate answer rejection, and progress reset.
+The tests cover the 6,400 distinct facts and their level distribution, round selection, locked-level access, answer scoring, continent and world challenge unlocking, duplicate answer rejection, and progress reset.
 # Atlas-Quest

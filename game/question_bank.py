@@ -1,8 +1,21 @@
 import json
+import random
 from functools import lru_cache
 from pathlib import Path
 
 from django.conf import settings
+
+
+PROMPT_FRAMES = (
+    "{}",
+    "Atlas check: {}",
+    "Quick globe challenge: {}",
+    "Expedition question: {}",
+    "Map room: {}",
+    "Navigator's quiz: {}",
+    "On this leg of the journey: {}",
+    "Test your world knowledge: {}",
+)
 
 
 @lru_cache(maxsize=1)
@@ -36,5 +49,19 @@ def get_levels():
             "name": question["name"],
             "region": question["region"],
             "icon": question["icon"],
+            "continent": question["continent"],
         }
     return [levels[index] for index in sorted(levels)]
+
+
+def create_question_variant(fact):
+    option_order = list(range(len(fact["options"])))
+    random.shuffle(option_order)
+    return {
+        **fact,
+        "prompt": random.choice(PROMPT_FRAMES).format(fact["prompt"]),
+        "options": [fact["options"][index] for index in option_order],
+        "answer_indices": [
+            option_order.index(index) for index in fact["answer_indices"]
+        ],
+    }
