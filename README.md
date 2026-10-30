@@ -43,7 +43,7 @@ The preview and production deployments should use their intended database enviro
 
 ## Question pool and editing
 
-- `data/facts.json` is the fact source: 64 authored geography facts plus 6,336 distinct populated-place facts from GeoNames, for 6,400 total (100 times the original bank). The six inhabited-continent quizzes have 800 facts each, Antarctica retains its eight authored facts, and the World Challenge has 1,592.
+- `data/facts.json` is the fact source: 92 authored geography facts plus 6,308 distinct populated-place facts from GeoNames, for 6,400 total. Each inhabited-continent quiz includes 12 curated questions alongside its place facts, Antarctica has eight authored questions, and the World Challenge has 12 authored questions alongside its place facts. Regular rounds draw only from the curated questions so the main journey stays accessible and varied.
 - `data/questions.json` is the compact runtime bank with one entry per distinct fact. Prompt framing and answer order are randomized when a round starts, avoiding a large pre-generated variants file while keeping five different facts per round.
 - To refresh the GeoNames facts, run:
 

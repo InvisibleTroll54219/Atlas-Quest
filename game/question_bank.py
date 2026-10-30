@@ -6,18 +6,6 @@ from pathlib import Path
 from django.conf import settings
 
 
-PROMPT_FRAMES = (
-    "{}",
-    "Atlas check: {}",
-    "Quick globe challenge: {}",
-    "Expedition question: {}",
-    "Map room: {}",
-    "Navigator's quiz: {}",
-    "On this leg of the journey: {}",
-    "Test your world knowledge: {}",
-)
-
-
 @lru_cache(maxsize=1)
 def get_question_bank():
     path = Path(settings.BASE_DIR) / "data" / "questions.json"
@@ -59,7 +47,6 @@ def create_question_variant(fact):
     random.shuffle(option_order)
     return {
         **fact,
-        "prompt": random.choice(PROMPT_FRAMES).format(fact["prompt"]),
         "options": [fact["options"][index] for index in option_order],
         "answer_indices": [
             option_order.index(index) for index in fact["answer_indices"]

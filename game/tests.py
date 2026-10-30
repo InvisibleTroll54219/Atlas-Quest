@@ -44,7 +44,8 @@ class QuestionBankTests(TestCase):
             {0: 800, 1: 800, 2: 800, 3: 800, 4: 800, 5: 800, 6: 8, 7: 1592},
         )
         geonames_facts = [question for question in bank if question.get("source") == "GeoNames"]
-        self.assertEqual(len(geonames_facts), 6336)
+        self.assertEqual(len(geonames_facts), 6308)
+        self.assertEqual(len(bank) - len(geonames_facts), 92)
         self.assertEqual(
             len({question["geoname_id"] for question in geonames_facts}),
             len(geonames_facts),
@@ -53,6 +54,13 @@ class QuestionBankTests(TestCase):
             self.assertEqual(
                 len(fact_groups),
                 {0: 800, 1: 800, 2: 800, 3: 800, 4: 800, 5: 800, 6: 8, 7: 1592}[level],
+            )
+            self.assertGreaterEqual(
+                sum(
+                    1 for group in fact_groups.values()
+                    if group[0].get("source") != "GeoNames"
+                ),
+                5,
             )
             self.assertEqual(
                 {question["continent"] for group in fact_groups.values() for question in group},
@@ -87,10 +95,26 @@ class QuestionBankTests(TestCase):
         fact_ids = [question["id"] for question in data["questions"]]
         self.assertEqual(len(set(fact_ids)), 5)
         for question in data["questions"]:
+            self.assertFalse(question["id"].startswith("GN-"))
+            self.assertNotIn("Which country is home to", question["prompt"])
+            self.assertEqual(question["prompt"].count("?"), 1)
             self.assertNotIn("answer_index", question)
             self.assertNotIn("answer_indices", question)
             self.assertNotIn("explanation", question)
             self.assertEqual(len(question["options"]), 4)
+
+    def test_every_destination_uses_curated_questions_instead_of_place_trivia(self):
+        self.client.get("/api/progress/")
+        progress = PlayerProgress.objects.get()
+        progress.unlocked_level = 7
+        progress.save()
+
+        for level_index in range(8):
+            response = self.client.get("/api/round/?level={}".format(level_index))
+            self.assertEqual(response.status_code, 200)
+            for question in response.json()["questions"]:
+                self.assertFalse(question["id"].startswith("GN-"))
+                self.assertNotIn("Which country is home to", question["prompt"])
 
     def test_locked_level_cannot_be_started(self):
         self.assertEqual(self.client.get("/api/round/?level=1").status_code, 403)

@@ -21,8 +21,8 @@ CONTINENTS = {
     "SA": (4, "South America"),
     "OC": (5, "Oceania"),
 }
-CITY_FACTS_PER_CONTINENT = 792
-WORLD_CITY_FACTS = 1584
+CITY_FACTS_PER_CONTINENT = 788
+WORLD_CITY_FACTS = 1580
 
 
 def download(url):
@@ -87,26 +87,19 @@ def _ordered_cities(cities):
     return sorted(cities, key=lambda city: (-city["population"], city["geoname_id"]))
 
 
-def _coordinates(value, positive, negative):
-    hemisphere = positive if value >= 0 else negative
-    return "{:.2f}°{}".format(abs(value), hemisphere)
-
-
 def make_city_fact(city, level, continent, country_names, distractor_names, admin_names):
     country = country_names[city["country_code"]]
     region = admin_names.get(city["admin_code"])
     if region and region.casefold() == city["name"].casefold():
         region = None
     if region:
-        prompt = "Which country is home to {}, in {}?".format(city["name"], region)
+        prompt = "A traveler is visiting {}, in {}. Which country are they in?".format(
+            city["name"], region
+        )
         location = region
     else:
-        latitude = _coordinates(city["latitude"], "N", "S")
-        longitude = _coordinates(city["longitude"], "E", "W")
-        prompt = "Which country is home to {}, near {} {}?".format(
-            city["name"], latitude, longitude
-        )
-        location = "near {} {}".format(latitude, longitude)
+        prompt = "Which country would you visit to see the city of {}?".format(city["name"])
+        location = continent
 
     choices = [name for name in distractor_names if name != country]
     rng = random.Random(city["geoname_id"])

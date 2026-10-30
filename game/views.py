@@ -85,10 +85,14 @@ def start_round(request):
     if level_index > progress.unlocked_level:
         return JsonResponse({"error": "Clear the previous level to unlock this one."}, status=403)
     fact_groups = get_questions_by_level().get(level_index, {})
-    if len(fact_groups) < QUESTIONS_PER_ROUND:
-        return JsonResponse({"error": "This level does not have enough questions."}, status=500)
+    curated_groups = [
+        group for group in fact_groups.values()
+        if group and group[0].get("source") != "GeoNames"
+    ]
+    if len(curated_groups) < QUESTIONS_PER_ROUND:
+        return JsonResponse({"error": "This level does not have enough curated questions."}, status=500)
 
-    selected_groups = random.sample(list(fact_groups.values()), QUESTIONS_PER_ROUND)
+    selected_groups = random.sample(curated_groups, QUESTIONS_PER_ROUND)
     selected_questions = [
         create_question_variant(random.choice(group)) for group in selected_groups
     ]
